@@ -1,3 +1,8 @@
+/*
+ID: your_id_here
+LANG: C++
+TASK: gift1
+*/
 #include <string>
 #include <iostream>
 #include <cstdio>
@@ -6,13 +11,13 @@
 #include <map>
 using namespace std;
 
-    map<string,int> m;
-    map<string,int>::iterator it;
+
 
     void
-    put(string name, int value)
+    put(string name, int value,map<string,int>& m)
     {
-        it = m.find(name);
+    	map<string,int>::iterator it;
+    	it = m.find(name);
         if ( it != m.end() )
         {
             m[name] = m[name] + value;
@@ -28,13 +33,18 @@ using namespace std;
     {
       try
       {
-       //freopen ("gift1.in","r",stdin);
-        freopen ("home/petar/programs/USACO/USACO/bin/Debug/gift1.in","r",stdin);
+
+        freopen ("gift1.in","r",stdin);
+        freopen ("gift1.out","w",stdout);
+        //freopen ("home/petar/programs/USACO/USACO/bin/Debug/gift1.in","r",stdin);
         //home/petar/programs/USACO/USACO/bin/Debug/gift1.in
         int NP;
         cin>>NP;
         string name;
         vector<string> names;
+        map<string,int> m;
+        map<string,int> initial_money;
+        map<string,int>::iterator it;
         for(int i =0;i < NP;++i)
         {
             cin>>name;
@@ -49,12 +59,15 @@ using namespace std;
         //}
 
         int n=NP;
+        //cout<<"n is:"<<n<<endl;
         while ( n!=0 )
         {
+
             n--;
             cin>>name;
             int initialAmount;
             cin>>initialAmount;
+            put(name,initialAmount,initial_money);
             int friendsNum;
             cin>>friendsNum;
             int moneyForGift;
@@ -74,19 +87,20 @@ using namespace std;
             {
                 string fr;
                 cin>>fr;
-                put(fr,moneyForGift);
+                put(fr,moneyForGift,m);
             }
-            put(name,moneyLeft);
+            put(name,moneyLeft,m);
 
-
-
+            //cout<<"n is:"<<n<<endl;
         }
-        for (int i =0;i<NP;++i)
+        //cout<<"n is:"<<n<<endl;
+        for (int i = 0 ; i < NP ; ++i)
         {
-            it=m.begin();
-            cout<<it->first<<"->"<<it->second<<endl;
-            ++it;
+            //it=m.find(names[i]);
+            cout<< names[i] << " " << m[names[i]] - initial_money[names[i]] << endl;
+            //++it;
         }
+
 
       }
       catch (int e)
