@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1387540751 source:/home/petar/programs/USACO/USACO/main.cpp
+	<string>
+	<iostream>
+	<cstdio>
+	<vector>
+	<algorithm>
+	<map>
+
